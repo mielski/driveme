@@ -2,11 +2,13 @@
 
 {% block content %}
   <section class="eventslist">
+    {% for event in events %}
       <section class="event">
-        <h1>Teddybear hospital</h1>
-        <p>Leer over het ziekehuis en laat je knuffel beter worden in het ziekenhuis.</p>
+        <h1>{{ event["title"] }}</h1>
+        <p>{{ event["desc"] }}</p>
         <div class="event__info">
-          <time class="events__date" datetime="2022-04-26">26 April • <span class="event__time">9:00-11:00</span> </time>
+          <time class="events__date" datetime="{{ event["isodate"] }}">{{ event["shortdate"] }} •
+            <span class="event__time">{{ event["start"] }}-{{ event["end"] }}</span></time>
           <div class="cars">
             <img class="cars__pic" src="{{ url_for('static', filename='car-svgrepo-com.svg') }}" alt="car image">
             <p class="cars__coverage">24/27</p>
@@ -20,20 +22,6 @@
         </form>
 
       </section>
-    <form method="get" class="event" action={{ url_for('register') }}>
-      <button class="events__button">
-        <h1 class="events__name">Oud Valkeveen</h1>
-        <div class="event__info">
-          <p class="events__date">
-            <time datetime="2022-06-26">26 Juni</time>
-          </p>
-          <div class="cars">
-            {#                svg to insert#}
-            <img class="cars__pic" src="{{ url_for('static', filename='car-svgrepo-com.svg') }}" alt="car image">
-            <p class="cars__coverage">27/27</p>
-          </div>
-        </div>
-      </button>
-    </form>
+    {% endfor %}
   </section>
 {% endblock %}
