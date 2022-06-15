@@ -1,0 +1,17 @@
+{% extends 'template.html' %}
+
+{% block content %}
+  <section>
+    <h1 class="events__name">Vinkeveen</h1>
+    <h2 class="events__desc">Beschrijving</h2>
+    <p>Vanaf 9:15 verzamelen, we gaan om 9:30 rijden en komen om 12:00 weer terug. Ouders begeleiden de kinderen
+    bij het verzamelen van de schelpjes. Broertjes en zusjes mogen ook mee.</p>
+    <h2>inschrijven</h2>
+  <form action={{ url_for('home') }}>
+    <input type="hidden" name="name" value="23f2a">
+    <label>Aantal personen: <input type="number"></label>
+    <button>aanmelden</button>
+
+  </form>
+  </section>
+{% endblock %}

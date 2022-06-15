@@ -1,0 +1,122 @@
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+header, body {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.nav {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #eee;
+}
+
+.nav__home {
+    margin: 0;
+}
+
+.nav__item {
+    text-decoration: none;
+    color: inherit;
+    font-size: 120%;
+}
+
+.nav__item:hover {
+    cursor: pointer;
+    color: darkcyan;
+    box-shadow: 0 1px 0 0 darkcyan;
+}
+
+/* event styling */
+
+.eventlist {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.event {
+    background: none;
+    margin: 0;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid darkcyan;
+    padding: 10px 20px;
+}
+
+
+.event__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event__time {
+    font-weight: 300;
+}
+
+.event__form {
+    border-top: 1px darkcyan inset;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+.event__count {
+    border: 1px #ddd solid;
+    max-width: 3em;
+
+}
+
+.event__count:invalid {
+    border: 2px solid red;
+}
+
+.event__button {
+    border: 1px darkcyan solid;
+    width: auto;
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin-left: 0.5em;
+    background: none;
+
+}
+
+.event__button:not(.event__button--active) {
+    color: darkcyan;
+
+}
+
+.event__button--active, .event__button:hover {
+    background: darkcyan;
+    color: white;
+}
+
+.event__submit:hover {
+    background: #006262;
+}
+
+.cars {
+    display: flex;
+}
+
+.cars__pic {
+    width: 20px;
+    margin: 5px;
+    aspect-ratio: initial;
+}
