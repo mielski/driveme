@@ -6,6 +6,7 @@
       <section class="event">
         <h1>{{ event["title"] }}</h1>
         <p>{{ event["desc"] }}</p>
+        {% set selection = selections[event["event_id"]] %}
         <div class="event__info">
           <time class="events__date" datetime="{{ event["isodate"] }}">{{ event["shortdate"] }} •
             <span class="event__time">{{ event["start"] }}-{{ event["end"] }}</span></time>
@@ -14,12 +15,13 @@
             <p class="cars__coverage">24/27</p>
           </div>
         </div>
-        <form method="get" class="event__form" action={{ url_for('register') }}>
+        <form method="post" class="event__form" action={{ url_for('home') }}>
+          <input type="hidden" name="event_id" value={{ event["event_id"] }}>
           <label>kinderen: <input class="event__count" type="text" pattern="[0-9]*"></label>
-          <button class="event__button event__button--active">Afwezig</button>
-          <button class="event__button">Reserve</button>
-          <button class="event__button">Ik kom graag</button>
-        </form>
+          <button type="submit" name="submit" value="absent" class="event__button {{ 'event__button--active' if selection == 'absent' }}">Afwezig</button>
+          <button type="submit" name="submit" value="maybe" class="event__button {{ 'event__button--active' if selection == 'maybe' }}">Reserve</button>
+          <button type="submit" name="submit" value="present" class="event__button {{ 'event__button--active' if selection == 'present' }}">Ik kom graag</button>
+        </form>,
 
       </section>
     {% endfor %}
