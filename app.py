@@ -30,9 +30,7 @@ events = [
 
 NO, MAYBE, YES = range(3)
 
-users = {
-
-}
+users = {}
 
 app.userdata = {'status':
                     {"ae23": 24,
@@ -47,6 +45,8 @@ def get_date_elements(date: datetime.date):
 @app.route('/', methods=["GET", "POST"])
 def home():  # put application's code here
 
+    if not session.get('name'):
+        return redirect(url_for('login'))
     if request.method == "POST":
         form = request.form
         event_id = form.get("event_id")
@@ -60,21 +60,38 @@ def home():  # put application's code here
     return render_template("home.html", title="Drive me", events=events, selections=app.userdata["status"])
 
 
-@app.route('/register')
+@app.route('/login', methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+        name = request.form.get('name')
+        password = request.form.get('password')
+        print(password, users.get(name), password == users.get(name))
+
+        if not password == users.get(name):
+            message = 'invalid username or password'
+            return render_template("login.html", message=message)
+        else:
+            session['name'] = name
+            return redirect(url_for('home'))
+    return render_template("login.html", message='')
+
+# @app.route('/register')
+# def register():
+#
+#     return render_template("register.html", title="aanmelden", name="Emiel")
+
+@app.route('/registreren', methods=["GET", "POST"])
 def register():
-
-    return render_template("register.html", title="aanmelden", name="Emiel")
-
-@app.route('/aanmelden', methods=["GET", "POST"])
-def sign_in():
     if request.method == "POST":
         name = request.form.get('name')
         password = request.form.get('password')
         users[name] = password
 
-        session['name'] = name
-        return redirect(url_for('home'))
+
+        return redirect(url_for('login'))
     return render_template('signup.html', title="aanmelden")
+
 
 if __name__ == '__main__':
     app.run()
