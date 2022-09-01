@@ -1,11 +1,11 @@
 import datetime
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
 
 load_dotenv()
 app = Flask(__name__)
-
+app.secret_key = 'asd-asd9821-xanw3sa'
 
 events = [
     {"event_id": "ae23",
@@ -30,15 +30,15 @@ events = [
 
 NO, MAYBE, YES = range(3)
 
-userdata = dict(id=1,
-              kids=3,
-              status={
-                  "ds3s": "absent",
-                  "ae23": "present",
-              })
-app.userdata = userdata
+users = {
 
+}
 
+app.userdata = {'status':
+                    {"ae23": 24,
+                     "ds3s": 3,
+                     }
+                }
 def get_date_elements(date: datetime.date):
 
     return (date.strftime("%Y-%m-%d"), date.strftime("%d %B"))
@@ -65,6 +65,16 @@ def register():
 
     return render_template("register.html", title="aanmelden", name="Emiel")
 
+@app.route('/aanmelden', methods=["GET", "POST"])
+def sign_in():
+    if request.method == "POST":
+        name = request.form.get('name')
+        password = request.form.get('password')
+        users[name] = password
+
+        session['name'] = name
+        return redirect(url_for('home'))
+    return render_template('signup.html', title="aanmelden")
 
 if __name__ == '__main__':
     app.run()
