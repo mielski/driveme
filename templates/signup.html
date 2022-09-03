@@ -10,6 +10,9 @@
       <label>wachtwoord<input type="password" name="password"></label>
       <label>token<input type="password" name="token"></label>
       <button>aanmelden</button>
+      {% if message %}
+        <p>{{ message }}</p>
+      {% endif %}
 
   </form>
   </section>

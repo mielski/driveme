@@ -1,11 +1,12 @@
 import datetime
+import os
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for
 
 load_dotenv()
 app = Flask(__name__)
-app.secret_key = 'asd-asd9821-xanw3sa'
+app.secret_key = 'atTCkM$Qj24ZxF&L8ApKn*HJHmcI4C!8DBp0'
 
 events = [
     {"event_id": "ae23",
@@ -76,17 +77,17 @@ def login():
             return redirect(url_for('home'))
     return render_template("login.html", message='')
 
-# @app.route('/register')
-# def register():
-#
-#     return render_template("register.html", title="aanmelden", name="Emiel")
-
 @app.route('/registreren', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         name = request.form.get('name')
         password = request.form.get('password')
+        token = request.form.get('token')
         users[name] = password
+
+        # check token
+        if not token == os.environ.get('REGISTER_TOKEN'):
+            return render_template('signup.html', title="aanmelden", message='illegal token')
 
 
         return redirect(url_for('login'))
