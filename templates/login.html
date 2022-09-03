@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>welcome</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<main>
+  <h1>Login</h1>
+  <p>Hi, please log in</p>
+  <form class="loginform" action="#" method="POST">
+    <label>Name<input name="name"></label>
+    <label>Password<input type="password" name="password"></label>
+    <button type="submit">Ok</button>
+    <p>{{ message }}</p>
+  </form>
+  <a href="{{ url_for('register') }}">sign up here</a>
+
+</main>
+</body>
+</html>
