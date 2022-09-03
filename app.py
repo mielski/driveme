@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 
 load_dotenv()
 app = Flask(__name__)
-app.secret_key = 'atTCkM$Qj24ZxF&L8ApKn*HJHmcI4C!8DBp0'
+app.secret_key = os.environ.get('SECRET_KEY')
 
 events = [
     {"event_id": "ae23",
