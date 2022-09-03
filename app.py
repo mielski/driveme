@@ -29,15 +29,14 @@ events = [
      }
 ]
 
-NO, MAYBE, YES = range(3)
 
-users = {}
+users = {"test": "test"}
 
-app.userdata = {'status':
-                    {"ae23": 24,
-                     "ds3s": 3,
-                     }
-                }
+# This is obsolete and eventually needs to be replaced with the users databse
+app.selections = {"ae23": 'absent',
+                  "ds3s": 'maybe',
+                  }
+
 def get_date_elements(date: datetime.date):
 
     return (date.strftime("%Y-%m-%d"), date.strftime("%d %B"))
@@ -52,13 +51,13 @@ def home():  # put application's code here
         form = request.form
         event_id = form.get("event_id")
         new_status = form.get("submit")
-        app.userdata["status"][event_id] = new_status
+        app.selections[event_id] = new_status
 
 
     for event in events:
         event["isodate"], event["shortdate"] = get_date_elements(event["date"])
 
-    return render_template("home.html", title="Drive me", events=events, selections=app.userdata["status"])
+    return render_template("home.html", title="Drive me", events=events, selections=app.selections)
 
 
 @app.route('/login', methods=["GET", "POST"])
