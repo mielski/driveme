@@ -89,22 +89,19 @@ header, body {
 
 .event__button {
     border: 1px darkcyan solid;
-    width: auto;
+    width: 100%;
     border-radius: 6px;
     padding: 5px 10px;
-    margin-left: 0.5em;
+    margin: 0.5rem 0;
     background: none;
+    transition: ease-in-out 0.2s;
 
 }
 
-.event__button:not(.event__button--active) {
-    color: darkcyan;
-
-}
-
-.event__button--active, .event__button:hover {
-    background: darkcyan;
-    color: white;
+.event__button:hover {
+    background: lightgray;
+    transform: translateY(3px);
+    /*cursor: pointer;*/
 }
 
 .event__submit:hover {
