@@ -2,7 +2,7 @@ import datetime
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, abort
 
 load_dotenv()
 app = Flask(__name__)
@@ -50,7 +50,7 @@ def home():  # put application's code here
     if request.method == "POST":
         form = request.form
         event_id = form.get("event_id")
-        return redirect(url_for('join_event', event=event_id))
+        return redirect(url_for('join_event', event_id=event_id))
 
     for event in events:
         event["isodate"], event["shortdate"] = get_date_elements(event["date"])
@@ -59,8 +59,13 @@ def home():  # put application's code here
 
 
 @app.route('/join', methods=["GET", "POST"])
-def join_event(event_id='ae23'):
-     return render_template("register.html", events=event, event_id=event_id)
+def join_event():
+    event_id = request.args.get('event_id')
+    if not event_id:
+        abort(400, "missing event id parameter in request")
+    event = [e for e in events if e["event_id"] == event_id][0]
+    print(event)
+    return render_template("register.html", event=event)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
