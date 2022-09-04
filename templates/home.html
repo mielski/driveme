@@ -4,8 +4,8 @@
   <section class="eventslist">
     {% for event in events %}
       <form action="{{ url_for('home') }}" method="POST">
-      <button class='event__button' type="submit" name="event_id" value="{{ event['event_id'] }}">
-        <h1>{{ event["title"] }}</h1>
+      <button class='event event__button' type="submit" name="event_id" value="{{ event['event_id'] }}">
+        <h1 class="event__title">{{ event["title"] }}</h1>
         <p>{{ event["desc"] }}</p>
         {% set selection = selections[event["event_id"]] %}
         <div class="event__info">

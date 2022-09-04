@@ -1,3 +1,9 @@
+:root {
+    --accent1: darkcyan;
+    --accent1-light: lightcyan;
+    --accent1-border: 1px solid darkcyan;
+}
+
 *,
 *::after,
 *::before {
@@ -38,8 +44,8 @@ header, body {
 
 .nav__item:hover {
     cursor: pointer;
-    color: darkcyan;
-    box-shadow: 0 1px 0 0 darkcyan;
+    color: var(--accent1);
+    box-shadow: 0 1px 0 0 var(--accent1);
 }
 
 /* event styling */
@@ -52,13 +58,29 @@ header, body {
 
 .event {
     background: none;
-    margin: 0;
     width: 100%;
     border-radius: 6px;
-    border: 1px solid darkcyan;
+    margin: 0.5rem 0;
+    border: var(--accent1-border);
     padding: 10px 20px;
 }
 
+.event__button {
+    transition: ease-in-out 0.2s;
+    text-align: left;
+    font: inherit;
+}
+
+.event__button:hover {
+    background: lightblue;
+    transform: translateY(3px);
+    /*cursor: pointer;*/
+}
+
+.event__title {
+    font-size: 1.5rem;
+    margin-top: 0.3rem;
+}
 
 .event__info {
     display: flex;
@@ -87,22 +109,8 @@ header, body {
     border: 2px solid red;
 }
 
-.event__button {
-    border: 1px darkcyan solid;
-    width: 100%;
-    border-radius: 6px;
-    padding: 5px 10px;
-    margin: 0.5rem 0;
-    background: none;
-    transition: ease-in-out 0.2s;
 
-}
 
-.event__button:hover {
-    background: lightgray;
-    transform: translateY(3px);
-    /*cursor: pointer;*/
-}
 
 .event__submit:hover {
     background: #006262;

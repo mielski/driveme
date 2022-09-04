@@ -1,8 +1,8 @@
 {% extends 'template.html' %}
 
 {% block content %}
-  <section class="event__button">
-        <h1>{{ event["title"] }}</h1>
+  <section class="event">
+        <h1 class="event__title">{{ event["title"] }}</h1>
         <p>{{ event["desc"] }}</p>
         <div class="event__info">
           <time class="events__date" datetime="{{ event["isodate"] }}">{{ event["shortdate"] }} •

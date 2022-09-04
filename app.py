@@ -41,6 +41,14 @@ def get_date_elements(date: datetime.date):
 
     return (date.strftime("%Y-%m-%d"), date.strftime("%d %B"))
 
+def get_event_from_id(event_id):
+
+    event_found = [e for e in events if e["event_id"] == event_id]
+    if event_found:
+        return event_found[0]
+    else:
+        return None
+
 
 @app.route('/', methods=["GET", "POST"])
 def home():  # put application's code here
@@ -61,11 +69,12 @@ def home():  # put application's code here
 @app.route('/join', methods=["GET", "POST"])
 def join_event():
     event_id = request.args.get('event_id')
-    if not event_id:
-        abort(400, "missing event id parameter in request")
-    event = [e for e in events if e["event_id"] == event_id][0]
-    print(event)
-    return render_template("register.html", event=event)
+    if event := get_event_from_id(event_id):
+        print(event)
+        return render_template("register.html", event=event)
+    else:
+        abort(400, "no event found, missing or wrong event_id provided in request")
+
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
