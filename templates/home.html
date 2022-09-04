@@ -3,8 +3,8 @@
 {% block content %}
   <section class="eventslist">
     {% for event in events %}
-      <form action="register.html" method="GET">
-      <button class='event__button' type="submit" name="event" value="{{ event['event_id'] }}">
+      <form action="{{ url_for('home') }}" method="POST">
+      <button class='event__button' type="submit" name="event_id" value="{{ event['event_id'] }}">
         <h1>{{ event["title"] }}</h1>
         <p>{{ event["desc"] }}</p>
         {% set selection = selections[event["event_id"]] %}

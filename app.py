@@ -45,20 +45,22 @@ def get_date_elements(date: datetime.date):
 @app.route('/', methods=["GET", "POST"])
 def home():  # put application's code here
 
-    if not session.get('name'):
+    if not session.get('name') in users:
         return redirect(url_for('login'))
     if request.method == "POST":
         form = request.form
         event_id = form.get("event_id")
-        new_status = form.get("submit")
-        app.selections[event_id] = new_status
-
+        return redirect(url_for('join_event', event=event_id))
 
     for event in events:
         event["isodate"], event["shortdate"] = get_date_elements(event["date"])
 
     return render_template("home.html", title="Drive me", events=events, selections=app.selections)
 
+
+@app.route('/join', methods=["GET", "POST"])
+def join_event(event_id='ae23'):
+     return render_template("register.html", events=event, event_id=event_id)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -75,6 +77,18 @@ def login():
             session['name'] = name
             return redirect(url_for('home'))
     return render_template("login.html", message='')
+
+@app.route('/logout')
+def logout():
+    if session.get('name'):
+        del session['name']
+
+    return "logged out successfully"
+
+@app.route('/about')
+def about():
+    return "work in progress"
+    flask.l
 
 @app.route('/registreren', methods=["GET", "POST"])
 def register():
