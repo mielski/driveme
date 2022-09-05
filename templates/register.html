@@ -20,9 +20,11 @@
   </section>
   <h2>inschrijven</h2>
   <form action={{ url_for('home') }}>
-    <input type="hidden" name="name" value="23f2a">
+    <input type="hidden" name="name" value={{ event['event_id'] }}>
+    <label>Op reservelijst <input type="checkbox" name="reserve"></label>
     <label>Aantal personen: <input type="number"></label>
-    <button>aanmelden</button>
+    <button name="action" value="register">aanmelden</button>
+    <button name="action" value="unregister">afmelden</button>
 
   </form>
 {% endblock %}
