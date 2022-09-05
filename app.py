@@ -71,7 +71,7 @@ def join_event():
     event_id = request.args.get('event_id')
     if event := get_event_from_id(event_id):
         print(event)
-        return render_template("register.html", event=event)
+        return render_template("register.html", event=event, title='join event')
     else:
         abort(400, "no event found, missing or wrong event_id provided in request")
 
