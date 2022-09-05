@@ -2,7 +2,7 @@ import datetime
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, abort
 
 load_dotenv()
 app = Flask(__name__)
@@ -41,23 +41,39 @@ def get_date_elements(date: datetime.date):
 
     return (date.strftime("%Y-%m-%d"), date.strftime("%d %B"))
 
+def get_event_from_id(event_id):
+
+    event_found = [e for e in events if e["event_id"] == event_id]
+    if event_found:
+        return event_found[0]
+    else:
+        return None
+
 
 @app.route('/', methods=["GET", "POST"])
 def home():  # put application's code here
 
-    if not session.get('name'):
+    if not session.get('name') in users:
         return redirect(url_for('login'))
     if request.method == "POST":
         form = request.form
         event_id = form.get("event_id")
-        new_status = form.get("submit")
-        app.selections[event_id] = new_status
-
+        return redirect(url_for('join_event', event_id=event_id))
 
     for event in events:
         event["isodate"], event["shortdate"] = get_date_elements(event["date"])
 
     return render_template("home.html", title="Drive me", events=events, selections=app.selections)
+
+
+@app.route('/join', methods=["GET", "POST"])
+def join_event():
+    event_id = request.args.get('event_id')
+    if event := get_event_from_id(event_id):
+        print(event)
+        return render_template("register.html", event=event, title='join event')
+    else:
+        abort(400, "no event found, missing or wrong event_id provided in request")
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -75,6 +91,18 @@ def login():
             session['name'] = name
             return redirect(url_for('home'))
     return render_template("login.html", message='')
+
+@app.route('/logout')
+def logout():
+    if session.get('name'):
+        del session['name']
+
+    return "logged out successfully"
+
+@app.route('/about')
+def about():
+    return "work in progress"
+    flask.l
 
 @app.route('/registreren', methods=["GET", "POST"])
 def register():
