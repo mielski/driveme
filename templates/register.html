@@ -1,18 +1,23 @@
 {% extends 'template.html' %}
 
 {% block content %}
+  <header class="eventnav">
+    <a class="eventnav__item" href={{ url_for('join_event', event_id=event['event_id']) }}>aanmelden</a>
+    <a class="eventnav__item" href={{ url_for('join_event', event_id=event['event_id']) }}>deelnemerslijst</a>
+  </header>
   <section class="event">
-        <h1 class="event__title">{{ event["title"] }}</h1>
-        <p>{{ event["desc"] }}</p>
-        <div class="event__info">
-          <time class="events__date" datetime="{{ event["isodate"] }}">{{ event["shortdate"] }} •
-            <span class="event__time">{{ event["start"] }}-{{ event["end"] }}</span></time>
-          <div class="cars">
-            <img class="cars__pic" src="{{ url_for('static', filename='car-svgrepo-com.svg') }}" alt="car image">
-            <p class="cars__coverage">24/27</p>
-          </div>
-        </div>
-  <section>
+    <h1 class="event__title">{{ event["title"] }}</h1>
+    <p>{{ event["desc"] }}</p>
+    <div class="event__info">
+      <time class="events__date" datetime="{{ event["isodate"] }}">{{ event["shortdate"] }} •
+        <span class="event__time">{{ event["start"] }}-{{ event["end"] }}</span></time>
+      <div class="cars">
+        <img class="cars__pic" src="{{ url_for('static', filename='car-svgrepo-com.svg') }}" alt="car image">
+        <p class="cars__coverage">24/27</p>
+      </div>
+    </div>
+
+  </section>
   <h2>inschrijven</h2>
   <form action={{ url_for('home') }}>
     <input type="hidden" name="name" value="23f2a">
@@ -20,5 +25,4 @@
     <button>aanmelden</button>
 
   </form>
-  </section>
 {% endblock %}

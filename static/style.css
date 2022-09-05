@@ -42,13 +42,37 @@ header, body {
     font-size: 120%;
 }
 
-.nav__item:hover {
+.nav__item:hover, .eventnav__item:hover {
     cursor: pointer;
     color: var(--accent1);
     box-shadow: 0 1px 0 0 var(--accent1);
 }
 
-/* event styling */
+.eventnav {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    background: #eee;
+    justify-content: space-around;
+
+}
+
+.eventnav__item {
+    /*border: #333 1px solid;*/
+    /*width: 100%;*/
+    margin: auto;
+    text-align: center;
+    padding: 0rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.eventnav__item_selected {
+    color: var(--accent1);
+    text-decoration: underline;
+}
 
 .eventlist {
     display: flex;
@@ -107,13 +131,6 @@ header, body {
 
 .event__count:invalid {
     border: 2px solid red;
-}
-
-
-
-
-.event__submit:hover {
-    background: #006262;
 }
 
 .cars {
