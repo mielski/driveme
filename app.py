@@ -70,7 +70,7 @@ def home():  # put application's code here
     for event in events:
         event["isodate"], event["shortdate"] = get_date_elements(event["date"])
 
-    return render_template("home.html", name=name, title="Drive me", events=events, selections=app.selections)
+    return render_template("home.html", title="Drive me", events=events, selections=app.selections)
 
 
 @app.route('/join', methods=["GET", "POST"])
@@ -78,7 +78,7 @@ def join_event():
     event_id = request.args.get('event_id')
     if event := get_event_from_id(event_id):
         print(event)
-        return render_template("register.html", name=name, event=event, title='join event')
+        return render_template("register.html", event=event, title='join event')
     else:
         abort(400, "no event found, missing or wrong event_id provided in request")
 

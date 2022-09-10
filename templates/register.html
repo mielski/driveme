@@ -1,10 +1,6 @@
 {% extends 'template.html' %}
 
 {% block content %}
-  <header class="eventnav">
-    <a class="eventnav__item" href={{ url_for('join_event', event_id=event['event_id']) }}>aanmelden</a>
-    <a class="eventnav__item" href={{ url_for('join_event', event_id=event['event_id']) }}>deelnemerslijst</a>
-  </header>
   <section class="event">
     <h1 class="event__title">{{ event["title"] }}</h1>
     <p>{{ event["desc"] }}</p>
