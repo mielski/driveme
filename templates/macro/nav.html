@@ -1,0 +1,16 @@
+{% macro header(name, title) %}
+<header class="header">
+    <nav class="nav">
+      <h1 class="nav__home">
+        <a class="nav__item" href="{{ url_for('home') }}">DriveMe</a>
+      </h1>
+    {% if not  name %}
+      <a class="nav__item" href="{{ url_for('login') }}">login</a>
+      <a class="nav__item" href="{{ url_for('register') }}">register</a>
+    {% else %}
+      <a class="nav__item" href="{{ url_for('logout') }}">logout</a>
+      <a class="nav__item" href="{{ url_for('about') }}">about</a>
+    {% endif %}
+    </nav>
+</header>
+{% endmacro %}

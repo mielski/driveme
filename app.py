@@ -37,6 +37,12 @@ app.selections = {"ae23": 'absent',
                   "ds3s": 'maybe',
                   }
 
+
+@app.context_processor
+def inject_name():
+    return dict(name=session.get('name'))
+
+
 def get_date_elements(date: datetime.date):
 
     return (date.strftime("%Y-%m-%d"), date.strftime("%d %B"))
@@ -53,7 +59,8 @@ def get_event_from_id(event_id):
 @app.route('/', methods=["GET", "POST"])
 def home():  # put application's code here
 
-    if not session.get('name') in users:
+    name = session.get('name')
+    if not name in users:
         return redirect(url_for('login'))
     if request.method == "POST":
         form = request.form
@@ -97,7 +104,8 @@ def logout():
     if session.get('name'):
         del session['name']
 
-    return "logged out successfully"
+    return redirect(url_for("login"))
+
 
 @app.route('/about')
 def about():

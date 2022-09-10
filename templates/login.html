@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>welcome</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-<main>
-  <h1>Login</h1>
+{%  extends 'template.html' %}
+
+{% block content %}
+
   <p>Hi, please log in</p>
   <form class="loginform" action="#" method="POST">
     <label>Name<input name="name"></label>
@@ -17,6 +11,4 @@
   </form>
   <a href="{{ url_for('register') }}">sign up here</a>
 
-</main>
-</body>
-</html>
+{%  endblock %}
