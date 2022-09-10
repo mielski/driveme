@@ -1,9 +1,9 @@
-{% macro header(email, title) %}
+{% macro header(name, title) %}
 <header class="header">
   <div class="nav-container">
     <span class="logo__name">DriveMe</span>
     <nav class="nav">
-    {% if not   email %}
+    {% if not  name %}
       <a class="nav__link" href="#"><span class="nav__item">login</span></a>
       <a class="nav__link" href="#"><span class="nav__item">register</span></a>
     {% else %}

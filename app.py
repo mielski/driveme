@@ -37,6 +37,12 @@ app.selections = {"ae23": 'absent',
                   "ds3s": 'maybe',
                   }
 
+
+@app.context_processor
+def inject_name():
+    return dict(name=session.get('name'))
+
+
 def get_date_elements(date: datetime.date):
 
     return (date.strftime("%Y-%m-%d"), date.strftime("%d %B"))
@@ -53,7 +59,8 @@ def get_event_from_id(event_id):
 @app.route('/', methods=["GET", "POST"])
 def home():  # put application's code here
 
-    if not session.get('name') in users:
+    name = session.get('name')
+    if not name in users:
         return redirect(url_for('login'))
     if request.method == "POST":
         form = request.form
@@ -63,7 +70,7 @@ def home():  # put application's code here
     for event in events:
         event["isodate"], event["shortdate"] = get_date_elements(event["date"])
 
-    return render_template("home.html", title="Drive me", events=events, selections=app.selections)
+    return render_template("home.html", name=name, title="Drive me", events=events, selections=app.selections)
 
 
 @app.route('/join', methods=["GET", "POST"])
@@ -71,7 +78,7 @@ def join_event():
     event_id = request.args.get('event_id')
     if event := get_event_from_id(event_id):
         print(event)
-        return render_template("register.html", event=event, title='join event')
+        return render_template("register.html", name=name, event=event, title='join event')
     else:
         abort(400, "no event found, missing or wrong event_id provided in request")
 
