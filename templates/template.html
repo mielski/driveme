@@ -1,3 +1,5 @@
+{% from "macro/nav.html" import header %}
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -8,13 +10,7 @@
     <link rel="icon" href="{{ url_for('static', filename='car-csvrepo-com.svg') }}"/>
 </head>
 <body>
-  <header class="nav">
-      <h1 class="nav__home">
-          <a class="nav__item" href="{{ url_for('home') }}">Home</a>
-      </h1>
-      <a class="nav__item" href="{{ url_for('logout') }}">logout</a>
-      <a class="nav__item" href="{{ url_for('about') }}">about</a>
-  </header>
+  {{ header("","") }}
   {% block content %}
       <main>placeholder</main>ab
   {% endblock %}
