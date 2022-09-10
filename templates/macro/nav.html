@@ -1,19 +1,16 @@
 {% macro header(name, title) %}
 <header class="header">
-  <div class="nav-container">
-    <span class="logo__name">DriveMe</span>
     <nav class="nav">
-    {% if not  name %}
-      <a class="nav__link" href="{{ url_for('login') }}"><span class="nav__item">login</span></a>
-      <a class="nav__link" href="{{ url_for('register') }}"><span class="nav__item">register</span></a>
-    {% else %}
       <h1 class="nav__home">
-          <a class="nav__item" href="{{ url_for('home') }}">Home</a>
+        <a class="nav__item" href="{{ url_for('home') }}">DriveMe</a>
       </h1>
+    {% if not  name %}
+      <a class="nav__item" href="{{ url_for('login') }}">login</a>
+      <a class="nav__item" href="{{ url_for('register') }}">register</a>
+    {% else %}
       <a class="nav__item" href="{{ url_for('logout') }}">logout</a>
       <a class="nav__item" href="{{ url_for('about') }}">about</a>
     {% endif %}
     </nav>
-  </div>
 </header>
 {% endmacro %}
