@@ -104,7 +104,8 @@ def logout():
     if session.get('name'):
         del session['name']
 
-    return "logged out successfully"
+    return redirect(url_for("login"))
+
 
 @app.route('/about')
 def about():
